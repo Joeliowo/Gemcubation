@@ -1,5 +1,6 @@
 package com.zozo.gem;
 
+import com.zozo.gem.init.GemEntities;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -22,5 +23,6 @@ public class GemC {
     @Mod.EventHandler
     public void init(FMLInitializationEvent e) {
         //Initialization is for (Tile-)Entities, Events, and World Generation
+        GemEntities.registerGems();
     }
 }
