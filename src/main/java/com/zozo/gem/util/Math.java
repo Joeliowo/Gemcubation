@@ -4,9 +4,10 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Math {
-    public Random rand = new Random();
+    public static Random rand = new Random();
 
-    public int arbiLerp(ArrayList<Integer> colors) {
+    public static int arbiLerp(ArrayList<Integer> colors) {
+        //Smoothly finds a color in the spectrum comprised of the colors in the ArrayList.
         if (colors.size() == 0) {
             return 0;
         }
@@ -17,9 +18,9 @@ public class Math {
         int r = 0;
         int g = 0;
         int b = 0;
-        float u = this.rand.nextFloat();
+        float u = rand.nextFloat();
 
-        int bound = this.rand.nextInt(colors.size() - 1);
+        int bound = rand.nextInt(colors.size() - 1);
 
         int b_r = (colors.get(bound) & 16711680) >> 16;
         int b_g = (colors.get(bound) & 65280) >> 8;

@@ -13,6 +13,6 @@ public class RenderGem<B extends EntityGem> extends RenderBiped<B> {
 
     @Override
     public void renderEntityName(B entityIn, double x, double y, double z, String name, double distanceSq){
-        this.renderLivingLabel(entityIn, name, x ,y ,z, 32);
+        this.renderLivingLabel(entityIn, name, x ,y ,z, 64);
     }
 }

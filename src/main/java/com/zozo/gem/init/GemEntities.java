@@ -22,10 +22,12 @@ public class GemEntities {
     public static int currentID = 0;
 
     public static void registerGems(){
+        //Registers the Gems into the game.
         registerGem("pebble", EntityPebble.class, 0, 0);
     }
 
     public static <B extends EntityGem> void registerGem(String name, Class<B> entity, int back, int fore){
+        //Does the registering.
         EntityRegistry.registerModEntity(new ResourceLocation("gem:" + name), entity, name, GemEntities.currentID, GemC.instance, 256, 1, true, back, fore);
         if (FMLCommonHandler.instance().getSide() == Side.CLIENT) {
             try {

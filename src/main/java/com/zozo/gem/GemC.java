@@ -1,6 +1,7 @@
 package com.zozo.gem;
 
 import com.zozo.gem.init.GemEntities;
+import com.zozo.gem.init.GemRecipes;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -17,7 +18,7 @@ public class GemC {
     public void preInit(FMLPreInitializationEvent e) {
         //Pre-Initialization Event is for Loot Tables, Recipes,
         //and setting a World Generator
-
+        GemRecipes.registerShapelessRecipes();
     }
 
     @Mod.EventHandler

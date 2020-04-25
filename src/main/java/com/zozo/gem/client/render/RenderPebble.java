@@ -13,17 +13,20 @@ import net.minecraft.util.ResourceLocation;
 public class RenderPebble extends RenderGem<EntityPebble> {
 
     public RenderPebble() {
+        //Is the renderer.
         super(Minecraft.getMinecraft().getRenderManager(), new ModelPebble(), .1f);
         this.addLayer(new LayerGemSkin(this));
     }
 
     @Override
     protected void preRenderCallback(EntityPebble gem, float partialTickTime) {
+        //Allows you to prepare the next frames render.
         GlStateManager.scale(.5F, .5F, .5F);
     }
 
     @Override
     protected ResourceLocation getEntityTexture(EntityPebble gem) {
-        return new ResourceLocation("gem:textures/entities/pebble/skin.png");
+        //Gets the base texture for the Gem.
+        return new ResourceLocation("gem:textures/entities/pebble/pebble.png");
     }
 }

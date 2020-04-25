@@ -1,1 +1,8 @@
-entity.pebble.name = Pebble
+entity.pebble.name=Pebble
+
+item.pebble_gem.name=Pebble Gem
+
+item.essence.name=Essence
+
+itemGroup.good_gems=Gemstones
+itemGroup.misc=Gemcubation Miscellaneous

@@ -1,53 +1,58 @@
 package com.zozo.gem.entities.gems;
 
+import com.zozo.gem.entities.ai.EntityAIFollow;
 import com.zozo.gem.entities.bases.EntityGem;
+import com.zozo.gem.init.GemItems;
 import com.zozo.gem.util.Math;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIBase;
+import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 
 import java.util.ArrayList;
+import java.util.Optional;
+import java.util.UUID;
 
 public class EntityPebble extends EntityGem {
-    public static final int SKIN_START = 0xBFAEA4;
-    public static final int SKIN_END = 0xB6B7CB;
+    public static final int SKIN_START = 0x2C242F;
+    public static final int SKIN_END = 0x887F92;
 
     public EntityPebble(World worldIn) {
+        //Every time the Gem loads into the world.
         super(worldIn);
+        this.setSize(.2f, .2f);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(6.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.45D);
+        this.droppedGemstone = GemItems.PEBBLE_GEM;
+    }
+
+    @Override
+    public boolean processInteract(EntityPlayer player, EnumHand hand){
+        if(!this.world.isRemote) {
+            ItemStack stack = player.getHeldItemMainhand();
+            if (this.isOwner(player)) {
+                if (stack == new ItemStack(Blocks.COBBLESTONE)) {
+                    this.entityDropItem(new ItemStack(Blocks.STONE_STAIRS), 0.0F);
+                    if (!player.isCreative()) {
+                        stack.shrink(1);
+                    }
+                    return super.processInteract(player, hand);
+                }
+            }
+        }
+        return super.processInteract(player, hand);
     }
 
     @Override
     public int generateSkinColor(){
+        //Generates the skin color on initial spawn.
         ArrayList<Integer> colors = new ArrayList<Integer>();
         colors.add(EntityPebble.SKIN_START);
         colors.add(EntityPebble.SKIN_END);
-        return arbiLerp(colors);
-    }
-
-    public int arbiLerp(ArrayList<Integer> colors) {
-        if (colors.size() == 0) {
-            return 0;
-        }
-        if (colors.size() == 1) {
-            return colors.get(0);
-        }
-
-        int r = 0;
-        int g = 0;
-        int b = 0;
-        float u = this.rand.nextFloat();
-
-        int bound = this.rand.nextInt(colors.size() - 1);
-
-        int b_r = (colors.get(bound) & 16711680) >> 16;
-        int b_g = (colors.get(bound) & 65280) >> 8;
-        int b_b = (colors.get(bound) & 255) >> 0;
-        int e_r = (colors.get(bound + 1) & 16711680) >> 16;
-        int e_g = (colors.get(bound + 1) & 65280) >> 8;
-        int e_b = (colors.get(bound + 1) & 255) >> 0;
-
-        r = (int) (u * b_r + (1f - u) * e_r);
-        g = (int) (u * b_g + (1f - u) * e_g);
-        b = (int) (u * b_b + (1f - u) * e_b);
-
-        return (r << 16) + (g << 8) + b;
+        return Math.arbiLerp(colors);
     }
 }
