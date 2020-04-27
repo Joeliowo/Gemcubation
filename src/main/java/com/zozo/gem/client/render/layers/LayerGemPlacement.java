@@ -11,11 +11,11 @@ import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.entity.EntityList;
 import net.minecraft.util.ResourceLocation;
 
-public class LayerGemSkin extends EntityLayer implements LayerRenderer<EntityGem> {
+public class LayerGemPlacement extends EntityLayer implements LayerRenderer<EntityGem> {
     public final RenderLivingBase<?> renderer;
     public final ModelBase model;
 
-    public LayerGemSkin(RenderLivingBase<?> renderer) {
+    public LayerGemPlacement(RenderLivingBase<?> renderer) {
         this.renderer = renderer;
         this.model = this.renderer.getMainModel();
     }
@@ -23,7 +23,7 @@ public class LayerGemSkin extends EntityLayer implements LayerRenderer<EntityGem
     @Override
     public void doRenderLayer(EntityGem gem, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
         this.renderer.bindTexture(this.getEntityTexture(gem));
-        int skin = gem.getSkinColor();
+        int skin = gem.getGemColor();
         float r = ((skin & 16711680) >> 16) / 255f;
         float g = ((skin & 65280) >> 8) / 255f;
         float b = ((skin & 255) >> 0) / 255f;
@@ -40,25 +40,15 @@ public class LayerGemSkin extends EntityLayer implements LayerRenderer<EntityGem
         GemPlacements placement = GemPlacements.getPlacement(gem.getGemPlacement());
         ResourceLocation loc = new ResourceLocation("");
         if(gem instanceof EntityPebble){
-            if(placement != GemPlacements.LEFT_EYE && placement != GemPlacements.RIGHT_EYE){
-                if(!gem.getIsDeformed()){
-                    loc = new ResourceLocation(location.getResourceDomain() + ":textures/entities/" + this.getName(gem) + "/skin_0.png");
-                }
-                else{
-                    loc = new ResourceLocation(location.getResourceDomain() + ":textures/entities/" + this.getName(gem) + "/skin_1.png");
-                }
+            if(gem.getIsDeformed() && placement == GemPlacements.RIGHT_EYE) {
+                loc = new ResourceLocation(location.getResourceDomain() + ":textures/entities/" + this.getName(gem) + "/gem_" + gem.getGemPlacement() + "_alternate" + ".png");
             }
-            else if(placement == GemPlacements.LEFT_EYE){
-                if(!gem.getIsDeformed()){
-                    loc = new ResourceLocation(location.getResourceDomain() + ":textures/entities/" + this.getName(gem) + "/skin_2.png");
-                }
-                else{
-                    loc = new ResourceLocation(location.getResourceDomain() + ":textures/entities/" + this.getName(gem) + "/skin_4.png");
-                }
+            else{
+                loc = new ResourceLocation(location.getResourceDomain() + ":textures/entities/" + this.getName(gem) + "/gem_"+ gem.getGemPlacement() + ".png");
             }
-            else if(placement == GemPlacements.RIGHT_EYE){
-                loc = new ResourceLocation(location.getResourceDomain() + ":textures/entities/" + this.getName(gem) + "/skin_3.png");
-            }
+        }
+        else{
+            loc = new ResourceLocation(location.getResourceDomain() + ":textures/entities/" + this.getName(gem) + "/gem_"+ gem.getGemPlacement() + ".png");
         }
         return loc;
     }

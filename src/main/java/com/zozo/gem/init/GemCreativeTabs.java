@@ -5,7 +5,7 @@ import net.minecraft.item.ItemStack;
 
 public class GemCreativeTabs extends CreativeTabs {
     public static final CreativeTabs CREATIVE_TAB_GOOD_GEMS = new GemCreativeTabs("good_gems", 0);
-    public static final CreativeTabs CREATIVE_TAB_MISC = new GemCreativeTabs("good_gems",1);
+    public static final CreativeTabs CREATIVE_TAB_MISC = new GemCreativeTabs("misc",1);
     public final int id;
 
     public GemCreativeTabs(String label, int id) {

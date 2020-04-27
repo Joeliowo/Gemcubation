@@ -1,5 +1,8 @@
 package com.zozo.gem.client.model;
 
+import com.zozo.gem.entities.bases.EntityGem;
+import com.zozo.gem.entities.bases.GemPlacements;
+import com.zozo.gem.entities.gems.EntityPebble;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
@@ -10,44 +13,109 @@ import net.minecraft.entity.Entity;
  * Created using Tabula 7.1.0
  */
 public class ModelPebble extends ModelBiped {
-    public ModelRenderer BipedBody;
-    public ModelRenderer BipedLeftLeg;
-    public ModelRenderer BipedRightLeg;
-    public ModelRenderer BipedLeftArm;
-    public ModelRenderer BipedRightArm;
-    public ModelRenderer BipedHead;
+    public ModelRenderer HeadMain;
+    public ModelRenderer HeadSide;
+    public ModelRenderer Body;
+    public ModelRenderer LeftArm;
+    public ModelRenderer RightArm;
+    public ModelRenderer LeftLeg;
+    public ModelRenderer RightLeg;
+    public ModelRenderer Dress;
+    public ModelRenderer LeftEyeGem;
+    public ModelRenderer RightEyeGem1;
+    public ModelRenderer RightEyeGem2;
+    public ModelRenderer BackHeadGem;
+    public ModelRenderer LeftHandGem;
+    public ModelRenderer RightHandGem;
+    public ModelRenderer ChestGem;
+    public ModelRenderer BackGem;
+    public ModelRenderer LeftLegGem;
+    public ModelRenderer RightLegGem;
 
     public ModelPebble() {
         this.textureWidth = 32;
         this.textureHeight = 32;
-        this.BipedLeftLeg = new ModelRenderer(this, 0, 7);
-        this.BipedLeftLeg.setRotationPoint(-1.9F, 20.0F, -1.0F);
-        this.BipedLeftLeg.addBox(0.0F, 0.0F, 0.0F, 2, 5, 2, 0.0F);
-        this.BipedBody = new ModelRenderer(this, 0, 0);
-        this.BipedBody.setRotationPoint(-2.0F, 18.5F, -1.5F);
-        this.BipedBody.addBox(0.0F, -2.0F, 0.0F, 4, 4, 3, 0.0F);
-        this.BipedLeftArm = new ModelRenderer(this, 8, 7);
-        this.BipedLeftArm.setRotationPoint(-4.0F, 16.5F, -1.0F);
-        this.BipedLeftArm.addBox(0.0F, 0.0F, 0.0F, 2, 4, 2, 0.0F);
-        this.BipedRightLeg = new ModelRenderer(this, 0, 7);
-        this.BipedRightLeg.setRotationPoint(-0.1F, 20.0F, -1.0F);
-        this.BipedRightLeg.addBox(0.0F, 0.0F, 0.0F, 2, 5, 2, 0.0F);
-        this.BipedRightArm = new ModelRenderer(this, 8, 7);
-        this.BipedRightArm.setRotationPoint(2.0F, 16.5F, -1.0F);
-        this.BipedRightArm.addBox(0.0F, 0.0F, 0.0F, 2, 4, 2, 0.0F);
-        this.BipedHead = new ModelRenderer(this, 14, 0);
-        this.BipedHead.setRotationPoint(-2.5F, 12.5F, -2.0F);
-        this.BipedHead.addBox(0.0F, 0.0F, 0.0F, 5, 4, 4, 0.0F);
+        this.LeftEyeGem = new ModelRenderer(this, 0, 22);
+        this.LeftEyeGem.setRotationPoint(-1.25F, 16.0F, -0.5F);
+        this.LeftEyeGem.addBox(0.0F, 0.0F, 0.0F, 1, 1, 1, 0.0F);
+        this.RightEyeGem1 = new ModelRenderer(this, 4, 22);
+        this.RightEyeGem1.setRotationPoint(0.25F, 16.0F, -0.5F);
+        this.RightEyeGem1.addBox(0.0F, 0.0F, 0.0F, 1, 1, 1, 0.0F);
+        this.RightEyeGem2 = new ModelRenderer(this, 8, 22);
+        this.RightEyeGem2.setRotationPoint(1.5F, 15.25F, -0.3F);
+        this.RightEyeGem2.addBox(0.0F, 0.0F, 0.0F, 1, 1, 1, 0.0F);
+        this.BackHeadGem = new ModelRenderer(this, 12, 22);
+        this.BackHeadGem.setRotationPoint(-0.5F, 16.0F, 2.5F);
+        this.BackHeadGem.addBox(0.0F, 0.0F, 0.0F, 1, 1, 1, 0.0F);
+        this.ChestGem = new ModelRenderer(this, 16, 22);
+        this.ChestGem.setRotationPoint(-0.5F, 19.0F, 0.0F);
+        this.ChestGem.addBox(0.0F, 0.0F, 0.0F, 1, 1, 1, 0.0F);
+        this.BackGem = new ModelRenderer(this, 20, 22);
+        this.BackGem.setRotationPoint(-0.5F, 19.0F, 2.0F);
+        this.BackGem.addBox(0.0F, 0.0F, 0.0F, 1, 1, 1, 0.0F);
+        this.LeftHandGem = new ModelRenderer(this, 24, 22);
+        this.LeftHandGem.setRotationPoint(-3.7F, 20.2F, 0.3F);
+        this.LeftHandGem.addBox(0.0F, 0.0F, 0.0F, 1, 1, 1, 0.0F);
+        this.RightHandGem = new ModelRenderer(this, 28, 22);
+        this.RightHandGem.setRotationPoint(2.8F, 20.2F, 0.3F);
+        this.RightHandGem.addBox(0.0F, 0.0F, 0.0F, 1, 1, 1, 0.0F);
+        this.LeftLegGem = new ModelRenderer(this, 0, 24);
+        this.LeftLegGem.setRotationPoint(-2.2F, 23.0F, 0.3F);
+        this.LeftLegGem.addBox(0.0F, 0.0F, 0.0F, 1, 1, 1, 0.0F);
+        this.RightLegGem = new ModelRenderer(this, 4, 24);
+        this.RightLegGem.setRotationPoint(1.2F, 23.0F, 0.3F);
+        this.RightLegGem.addBox(0.0F, 0.0F, 0.0F, 1, 1, 1, 0.0F);
+        this.HeadMain = new ModelRenderer(this, 0, 0);
+        this.HeadMain.setRotationPoint(-2.0F, 15.0F, 0.0F);
+        this.HeadMain.addBox(0.0F, 0.0F, 0.0F, 4, 3, 3, 0.0F);
+        this.HeadSide = new ModelRenderer(this, 14, 0);
+        this.HeadSide.setRotationPoint(0.5F, 14.5F, 0.2F);
+        this.HeadSide.addBox(0.0F, 0.0F, 0.0F, 3, 3, 3, 0.0F);
+        this.Body = new ModelRenderer(this, 0, 6);
+        this.Body.setRotationPoint(-1.5F, 18.0F, 0.5F);
+        this.Body.addBox(0.0F, 0.0F, 0.0F, 3, 3, 2, 0.0F);
+        this.LeftArm = new ModelRenderer(this, 0, 11);
+        this.LeftArm.setRotationPoint(-3.5F, 18.0F, 0.5F);
+        this.LeftArm.addBox(0.0F, 0.0F, 0.0F, 2, 3, 2, 0.0F);
+        this.RightArm = new ModelRenderer(this, 0, 11);
+        this.RightArm.setRotationPoint(1.5F, 18.0F, 0.5F);
+        this.RightArm.addBox(0.0F, 0.0F, 0.0F, 2, 3, 2, 0.0F);
+        this.Dress = new ModelRenderer(this, 0, 16);
+        this.Dress.setRotationPoint(-2.5F, 21.0F, 0.0F);
+        this.Dress.addBox(0.0F, 0.0F, 0.0F, 5, 3, 3, 0.0F);
+        this.LeftLeg = new ModelRenderer(this, 8, 11);
+        this.LeftLeg.setRotationPoint(-2.0F, 21.0F, 0.5F);
+        this.LeftLeg.addBox(0.0F, 0.0F, 0.0F, 2, 3, 2, 0.0F);
+        this.RightLeg = new ModelRenderer(this, 8, 11);
+        this.RightLeg.setRotationPoint(0.0F, 21.0F, 0.5F);
+        this.RightLeg.addBox(0.0F, 0.0F, 0.0F, 2, 3, 2, 0.0F);
     }
 
     @Override
-    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) { 
-        this.BipedLeftLeg.render(f5);
-        this.BipedBody.render(f5);
-        this.BipedLeftArm.render(f5);
-        this.BipedRightLeg.render(f5);
-        this.BipedRightArm.render(f5);
-        this.BipedHead.render(f5);
+    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
+        EntityPebble gem = (EntityPebble)entity;
+        if(gem.getHasDress()) {
+            this.Dress.render(f5);
+        }
+        if(gem.getIsDeformed()) {
+            this.HeadSide.render(f5);
+        }
+        this.HeadMain.render(f5);
+        this.Body.render(f5);
+        this.LeftArm.render(f5);
+        this.RightArm.render(f5);
+        this.LeftLeg.render(f5);
+        this.RightLeg.render(f5);
+        this.LeftEyeGem.render(f5);
+        this.RightEyeGem1.render(f5);
+        this.RightEyeGem2.render(f5);
+        this.BackHeadGem.render(f5);
+        this.LeftHandGem.render(f5);
+        this.RightHandGem.render(f5);
+        this.ChestGem.render(f5);
+        this.BackGem.render(f5);
+        this.LeftLegGem.render(f5);
+        this.RightLegGem.render(f5);
     }
 
     /**
