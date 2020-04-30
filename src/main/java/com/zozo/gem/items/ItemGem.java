@@ -4,6 +4,7 @@ import com.zozo.gem.GemC;
 import com.zozo.gem.entities.bases.EntityGem;
 import com.zozo.gem.entities.gems.EntityPebble;
 import com.zozo.gem.init.GemCreativeTabs;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -77,6 +78,15 @@ public class ItemGem extends Item {
             world.spawnEntity(gem);
             return true;
         }
+        return false;
+    }
+
+    @Override
+    public boolean onEntityItemUpdate(EntityItem entity) {
+        entity.setNoDespawn();
+        entity.isDead = false;
+        entity.setEntityInvulnerable(true);
+        entity.extinguish();
         return false;
     }
 

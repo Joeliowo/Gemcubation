@@ -3,15 +3,14 @@ package com.zozo.gem.entities.bases;
 import com.google.common.base.Optional;
 import com.zozo.gem.entities.ai.EntityAIFollow;
 import com.zozo.gem.entities.ai.EntityAIWander;
+import com.zozo.gem.init.GemItems;
 import com.zozo.gem.items.ItemGem;
 import net.minecraft.entity.*;
-import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.DataSerializer;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
@@ -21,7 +20,6 @@ import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 
-import java.util.List;
 import java.util.UUID;
 
 public abstract class EntityGem extends EntityCreature {
@@ -66,11 +64,7 @@ public abstract class EntityGem extends EntityCreature {
         this.dataManager.register(EntityGem.DEFORMATION, false);
         this.tasks.addTask(4, new EntityAIWander(this, this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue()));
         this.tasks.addTask(4, new EntityAIFollow(this, this.getOwnerID(), this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue()));
-    }
-
-    @Override
-    public boolean canDespawn() {
-        return false;
+        this.droppedGemstone = this.getGemItem();
     }
 
     @Override
@@ -136,19 +130,21 @@ public abstract class EntityGem extends EntityCreature {
         //When the player right clicks on the Gem.
         if(!this.world.isRemote){
             if(hand == EnumHand.MAIN_HAND && player.getHeldItemMainhand() == ItemStack.EMPTY){
-                if(!this.getOwned() && !player.isSneaking()){
-                    this.setOwnerID(player);
-                    player.sendMessage(new TextComponentString("This Gem now belongs to you!"));
-                    return super.processInteract(player, hand);
-                }
-                else if(this.isOwner(player) && this.getOwned()){
-                    if(player.isSneaking()){
-                        this.cycleMovementAI(player);
+                if(!player.isSneaking()){
+                    if(!this.getOwned()) {
+                        this.setOwnerID(player);
+                        player.sendMessage(new TextComponentString("This Gem now belongs to you!"));
+                        return super.processInteract(player, hand);
                     }
                 }
-                else{
-                    return super.processInteract(player, hand);
+                else {
+                    if(this.getOwned()){
+                        if(this.isOwner(player)){
+                            this.cycleMovementAI(player);
+                        }
+                    }
                 }
+                return super.processInteract(player, hand);
             }
         }
         return super.processInteract(player, hand);
@@ -188,6 +184,32 @@ public abstract class EntityGem extends EntityCreature {
             this.entityDropItem(stack, 0.0F);
         }
         super.onDeath(source);
+    }
+
+
+    @Override
+    public boolean canDespawn() {
+        return false;
+    }
+
+    @Override
+    public boolean canBreatheUnderwater() {
+        return true;
+    }
+
+    @Override
+    public boolean getAlwaysRenderNameTag() {
+        return true;
+    }
+
+    public Item getGemItem() {
+        ItemGem gem = GemItems.PEBBLE_GEM;
+        try {
+            gem = (ItemGem) GemItems.class.getField((this.getName().replaceAll(".+?Entity", "") + "_gem").toUpperCase()).get(null);
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+        return gem;
     }
 
     public boolean isOwner(EntityLivingBase entity){

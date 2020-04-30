@@ -14,9 +14,8 @@ import net.minecraftforge.fml.relauncher.Side;
 @Mod.EventBusSubscriber
 public class GemItems {
     public static final ItemGem PEBBLE_GEM = new ItemGem("pebble");
-    public static final Item ESSENCE = new Item().setUnlocalizedName("essence").setCreativeTab(GemCreativeTabs.CREATIVE_TAB_MISC);
+    public static final Item ESSENCE = new Item().setUnlocalizedName("essence");
 
-    @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event){
         //Puts all the Items into registry.
         registerItem(PEBBLE_GEM, event);

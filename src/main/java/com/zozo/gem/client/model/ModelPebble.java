@@ -65,27 +65,35 @@ public class ModelPebble extends ModelBiped {
         this.RightLegGem = new ModelRenderer(this, 4, 24);
         this.RightLegGem.setRotationPoint(1.2F, 23.0F, 0.3F);
         this.RightLegGem.addBox(0.0F, 0.0F, 0.0F, 1, 1, 1, 0.0F);
+
         this.HeadMain = new ModelRenderer(this, 0, 0);
         this.HeadMain.setRotationPoint(-2.0F, 15.0F, 0.0F);
         this.HeadMain.addBox(0.0F, 0.0F, 0.0F, 4, 3, 3, 0.0F);
+
         this.HeadSide = new ModelRenderer(this, 14, 0);
         this.HeadSide.setRotationPoint(0.5F, 14.5F, 0.2F);
         this.HeadSide.addBox(0.0F, 0.0F, 0.0F, 3, 3, 3, 0.0F);
+
         this.Body = new ModelRenderer(this, 0, 6);
         this.Body.setRotationPoint(-1.5F, 18.0F, 0.5F);
         this.Body.addBox(0.0F, 0.0F, 0.0F, 3, 3, 2, 0.0F);
+
         this.LeftArm = new ModelRenderer(this, 0, 11);
         this.LeftArm.setRotationPoint(-3.5F, 18.0F, 0.5F);
         this.LeftArm.addBox(0.0F, 0.0F, 0.0F, 2, 3, 2, 0.0F);
+
         this.RightArm = new ModelRenderer(this, 0, 11);
         this.RightArm.setRotationPoint(1.5F, 18.0F, 0.5F);
         this.RightArm.addBox(0.0F, 0.0F, 0.0F, 2, 3, 2, 0.0F);
+
         this.Dress = new ModelRenderer(this, 0, 16);
         this.Dress.setRotationPoint(-2.5F, 21.0F, 0.0F);
         this.Dress.addBox(0.0F, 0.0F, 0.0F, 5, 3, 3, 0.0F);
+
         this.LeftLeg = new ModelRenderer(this, 8, 11);
         this.LeftLeg.setRotationPoint(-2.0F, 21.0F, 0.5F);
         this.LeftLeg.addBox(0.0F, 0.0F, 0.0F, 2, 3, 2, 0.0F);
+
         this.RightLeg = new ModelRenderer(this, 8, 11);
         this.RightLeg.setRotationPoint(0.0F, 21.0F, 0.5F);
         this.RightLeg.addBox(0.0F, 0.0F, 0.0F, 2, 3, 2, 0.0F);
